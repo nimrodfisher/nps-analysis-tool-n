@@ -41,15 +41,30 @@ def calculate_nps(df):
 
 
 def plot_sentiment_analysis(df):
-    """Plot the sentiment analysis results."""
+    """Plot the sentiment analysis results with custom colors."""
     if 'Sentiment' in df.columns:
-        sentiment_counts = df['Sentiment'].value_counts()
-        sentiment_data = sentiment_counts.reset_index()
-        sentiment_data.columns = ['Sentiment', 'Counts']
+        # Count the occurrences of each sentiment
+        sentiment_counts = df['Sentiment'].value_counts().reset_index()
+        sentiment_counts.columns = ['Sentiment', 'Counts']
 
-        fig = px.bar(sentiment_data, x='Sentiment', y='Counts', title='Sentiment Analysis Results', text='Counts',
-                     color='Sentiment', labels={'Counts': 'Number of Feedbacks', 'Sentiment': 'Sentiment Type'})
-        st.plotly_chart(fig)
+        # Define custom colors
+        color_map = {
+            'Positive': 'green',  # Green for Positive
+            'Neutral': 'blue',    # Blue for Neutral
+            'Negative': 'red'     # Red for Negative
+        }
+
+        # Create the bar plot with custom colors
+        fig = px.bar(sentiment_counts,
+                     x='Sentiment',
+                     y='Counts',
+                     text='Counts',
+                     title='Sentiment Analysis Results',
+                     color='Sentiment',
+                     color_discrete_map=color_map)  # Applying the custom color map
+
+        fig.update_traces(texttemplate='%{text}', textposition='outside')
+        st.plotly_chart(fig, use_container_width=True)
     else:
         st.error("Sentiment data is not available. Please run sentiment analysis first.")
 def perform_sentiment_analysis(df):
