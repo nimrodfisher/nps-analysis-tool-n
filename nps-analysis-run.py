@@ -141,7 +141,7 @@ def extract_keywords_bi_grams(df, category):
 
 def main():
     st.title('NPS Analyzer Tool')
-    blog_url = "https://bit.ly/44EqvBb"
+    blog_url = "https://www.linkedin.com/pulse/maximizing-nps-impact-automation-path-enhanced-customer-nimrod-fisher-iiegf/?trackingId=lGvg8yvSQviO%2FtlsC9hHhw%3D%3D"
     st.sidebar.markdown(f"📊 [Read my full blog on NPS analysis!]({blog_url})")
     uploaded_file = st.sidebar.file_uploader("Upload your input CSV file (ID, Date, Product, Feedback, Score)", type="csv")
 
